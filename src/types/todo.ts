@@ -4,7 +4,6 @@ export interface Todo {
   description?: string;
   status: Status;
   dueDate: Date;
-  createdDate: Date;
 }
 
 export type Status = 'pending' | 'done';

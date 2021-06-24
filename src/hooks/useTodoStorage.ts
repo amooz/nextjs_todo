@@ -1,15 +1,16 @@
-import { CreateProps, GetProps, RemoveProps, UpdateProps, StorageMethods } from '../types/storage';
+import { CreateProps, RemoveProps, UpdateProps, StorageMethods } from '../types/storage';
 import { Todo } from '../types/todo';
 
 export function useTodoStorage(): StorageMethods {
-  const storage = sessionStorage;
-
-  const create = ({ todo }: CreateProps) => {
+  const create = ({ todo }: CreateProps): Todo => {
+    const storage = getLocalStorageMethod();
     const todoSerialized = JSON.stringify(todo);
     storage.setItem(String(todo.id), todoSerialized);
+    return todo;
   };
 
-  const update = ({ id, values }: UpdateProps) => {
+  const update = ({ id, values }: UpdateProps): Partial<Todo> => {
+    const storage = getLocalStorageMethod();
     if (!values) {
       return {};
     }
@@ -24,22 +25,16 @@ export function useTodoStorage(): StorageMethods {
   };
 
   const remove = ({ id, todo }: RemoveProps) => {
+    const storage = getLocalStorageMethod();
     const idToRemove = id ? String(id) : String(todo.id);
     storage.removeItem(idToRemove);
   };
 
-  const get = ({ id }: GetProps) => {
-    if (id) {
-      const candidate = storage.getItem(String(id));
-      if (candidate) {
-      }
-    }
-  };
-
   const getAll = () => {
-    const allKeys = Object.keys(localStorage);
+    const storage = getLocalStorageMethod();
+    const allKeys = Object.keys(storage);
     return allKeys.reduce<Todo[]>((results, key) => {
-      const todoSerialized = localStorage.getItem(key);
+      const todoSerialized = storage.getItem(key);
       if (todoSerialized) {
         const todo = JSON.parse(todoSerialized);
         results.push(todo);
@@ -52,7 +47,10 @@ export function useTodoStorage(): StorageMethods {
     create,
     update,
     remove,
-    get,
     getAll,
   };
+}
+
+function getLocalStorageMethod() {
+  return window.sessionStorage;
 }
