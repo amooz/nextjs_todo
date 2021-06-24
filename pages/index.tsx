@@ -1,6 +1,7 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import { Layout } from "../src/components/Layout";
+import "@fontsource/roboto";
 
 export default function Home() {
-  return <Container>Hello, world!</Container>;
+  return <Layout />;
 }
