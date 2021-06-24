@@ -28,9 +28,8 @@ export interface GetProps {
 }
 
 export interface StorageMethods {
-  create: ({ todo }: CreateProps) => void;
-  update: ({ id, values }: UpdateProps) => void;
+  create: ({ todo }: CreateProps) => Todo;
+  update: ({ id, values }: UpdateProps) => Todo | {};
   remove: ({ id, todo }: RemoveProps) => void;
-  get: ({ id }: GetProps) => void;
-  getAll: () => void;
+  getAll: () => Todo[];
 }
