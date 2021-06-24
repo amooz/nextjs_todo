@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import type { AppProps } from "next/app";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../theme";
+import React, { useEffect } from 'react';
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    const jssStyles = document.querySelector("#jss-server-side");
+    const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles && jssStyles.parentElement) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
