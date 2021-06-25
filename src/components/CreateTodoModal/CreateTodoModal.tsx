@@ -64,7 +64,6 @@ export function CreateTodoModal({ createTodo, onClose: onCloseModal, open = fals
             <TextField
               label="dueDate"
               type="date"
-              defaultValue="2021-05-25"
               required
               value={formatDateFor(formData.dueDate)}
               onChange={setTodoDueDate}

@@ -1,18 +1,26 @@
 import React from 'react';
 import { Layout } from '../src/components/Layout';
 import '@fontsource/roboto';
-import { TodoCard } from '../src/components/TodoCard';
 import { Todo } from '../src/types/todo';
 import { TodoGetter } from './api/services/todo/getter';
+import { useTodos } from '../src/hooks/useTodos';
+import { TodosContext } from '../src/contexts/todosContext';
+import { TodosList } from '../src/components/TodosList';
 
 interface Props {
   todos?: Todo[];
 }
 
-export default function Home({ todos }: Props) {
-  const todoCards = todos?.map((todo) => <TodoCard key={todo._id} todo={todo} />);
+export default function Home({ todos: initialTodos }: Props) {
+  const { todos, refresh } = useTodos({ todos: initialTodos });
 
-  return <Layout>{todoCards}</Layout>;
+  return (
+    <TodosContext.Provider value={{ todos, refresh }}>
+      <Layout>
+        <TodosList />
+      </Layout>
+    </TodosContext.Provider>
+  );
 }
 
 export async function getServerSideProps() {
