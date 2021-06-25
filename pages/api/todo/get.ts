@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { TodoGetter } from '../services/todo/getter';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  let nextId = 0;
-  res.status(200).json({ id: nextId++ });
+const GetTodos = async (_req: NextApiRequest, res: NextApiResponse) => {
+  const todoGetter = new TodoGetter();
+  const { status, data, error } = await todoGetter.get();
+  res.status(status).json({ data, error });
 };
+
+export default GetTodos;
