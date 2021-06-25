@@ -1,15 +1,26 @@
 import React from 'react';
 import { Layout } from '../src/components/Layout';
 import '@fontsource/roboto';
-import { useTodoStorage } from '../src/hooks/useTodoStorage';
-import { useIsServer } from '../src/hooks/useIsServer';
 import { TodoCard } from '../src/components/TodoCard';
+import { Todo } from '../src/types/todo';
+import { TodoGetter } from './api/services/todo/getter';
 
-export default function Home() {
-  const { getAll } = useTodoStorage();
-  const { isServer } = useIsServer();
+interface Props {
+  todos?: Todo[];
+}
 
-  const todoCards = isServer ? [] : getAll().map((todo) => <TodoCard key={todo.id} todo={todo} />);
+export default function Home({ todos }: Props) {
+  const todoCards = todos?.map((todo) => <TodoCard key={todo._id} todo={todo} />);
 
   return <Layout>{todoCards}</Layout>;
+}
+
+export async function getServerSideProps() {
+  // SSR, can safely call the getTodo service directly
+  const todoGetter = new TodoGetter();
+  const { data: todos } = await todoGetter.get();
+
+  return {
+    props: { todos },
+  };
 }

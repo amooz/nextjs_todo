@@ -6,7 +6,7 @@ interface Props {
 }
 
 export function TodoCard({ todo }: Props) {
-  const { id, title, description, status, dueDate } = todo;
+  const { _id: id, title, description, status, dueDate } = todo;
 
   return (
     <Card key={id}>

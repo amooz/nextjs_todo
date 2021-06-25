@@ -1,4 +1,4 @@
-import { UnsavedTodo } from '../types/storage';
+import { UnsavedTodo } from '../types/todo';
 
 export function useCreateTodo() {
   const ceateTodo = async (todo: UnsavedTodo) => {

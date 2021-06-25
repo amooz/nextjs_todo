@@ -9,7 +9,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { useState } from 'react';
-import { UnsavedTodo } from '../../types/storage';
+import { UnsavedTodo } from '../../types/todo';
 
 interface Props {
   createTodo: (todo: UnsavedTodo) => void;

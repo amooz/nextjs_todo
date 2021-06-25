@@ -1,5 +1,5 @@
 import { Result } from '../../../../src/types/result';
-import { UnsavedTodo } from '../../../../src/types/storage';
+import { UnsavedTodo } from '../../../../src/types/todo';
 import { TodoService } from './_todoService';
 
 export class TodoCreator extends TodoService {
