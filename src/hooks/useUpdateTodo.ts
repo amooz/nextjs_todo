@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { TodosContext } from '../contexts/todosContext';
-import { UnsavedTodo } from '../types/todo';
+import { Todo } from '../types/todo';
 
-export function useCreateTodo() {
+export function useUpdateTodo() {
   const { refresh: refreshTodos } = useContext(TodosContext);
 
-  const createTodo = async (todo: UnsavedTodo) => {
-    const request = await fetch('/api/todo/create', {
+  const updateTodo = async (todo: Todo) => {
+    const request = await fetch('/api/todo/update', {
       body: JSON.stringify(todo),
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
@@ -14,5 +14,5 @@ export function useCreateTodo() {
     await refreshTodos();
     return request.json();
   };
-  return createTodo;
+  return updateTodo;
 }
