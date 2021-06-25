@@ -1,6 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { UnsavedTodo } from '../../../src/types/storage';
+import { TodoCreator } from '../services/todo/creator';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  let nextId = 0;
-  res.status(200).json({ id: nextId++ });
+const CreateTodo = async (req: NextApiRequest, res: NextApiResponse) => {
+  const todoCreator = new TodoCreator();
+
+  const todo = req.body as UnsavedTodo;
+
+  const { status, data, error } = await todoCreator.create(todo);
+
+  res.status(status).json({ error, data });
 };
+
+export default CreateTodo;
