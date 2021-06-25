@@ -1,6 +1,7 @@
 import { Todo } from './todo';
 
 export type TodoId = Pick<Todo, 'id'>;
+export type UnsavedTodo = Omit<Todo, 'id'>;
 
 export interface CreateProps {
   todo: Todo;
@@ -8,7 +9,7 @@ export interface CreateProps {
 
 export interface UpdateProps {
   id: TodoId;
-  values: Partial<Omit<Todo, 'id'>>;
+  values: Partial<UnsavedTodo>;
 }
 
 export interface RemovePropsById {

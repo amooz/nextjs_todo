@@ -1,6 +1,7 @@
 import { Container, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import { ReactNode } from 'react';
 import { useToggle } from '../../hooks/useToggle';
+import { UnsavedTodo } from '../../types/storage';
 import { CreateTodoModal } from '../CreateTodoModal';
 
 interface Props {
@@ -9,6 +10,8 @@ interface Props {
 
 export function Layout({ children }: Props) {
   const { value: showCreateTodoModal, toggleValue: toggleCreateTodoModal } = useToggle();
+
+  const createTodo = (todo: UnsavedTodo) => console.log(todo);
 
   return (
     <>
@@ -23,7 +26,7 @@ export function Layout({ children }: Props) {
         </AppBar>
         {children}
       </Container>
-      <CreateTodoModal open={showCreateTodoModal} onClose={toggleCreateTodoModal} />
+      <CreateTodoModal open={showCreateTodoModal} onClose={toggleCreateTodoModal} createTodo={createTodo} />
     </>
   );
 }
