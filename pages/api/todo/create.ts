@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { UnsavedTodo } from '../../../src/types/storage';
+import { UnsavedTodo } from '../../../src/types/todo';
 import { TodoCreator } from '../services/todo/creator';
 
 const CreateTodo = async (req: NextApiRequest, res: NextApiResponse) => {
