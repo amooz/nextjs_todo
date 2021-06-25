@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { TodoUpdater } from '../services/todo/updater';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  let nextId = 0;
-  res.status(200).json({ id: nextId++ });
+  const todoUpdater = new TodoUpdater();
+  const todo = req.body;
+  const { status, data, error } = await todoUpdater.update(todo);
+
+  res.status(status).json({ data, error });
 };

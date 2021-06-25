@@ -1,4 +1,6 @@
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography, Button } from '@material-ui/core';
+import React from 'react';
+import { useUpdateTodo } from '../../hooks/useUpdateTodo';
 import { Todo } from '../../types/todo';
 
 interface Props {
@@ -7,6 +9,17 @@ interface Props {
 
 export function TodoCard({ todo }: Props) {
   const { _id: id, title, description, status, dueDate } = todo;
+  const updateTodo = useUpdateTodo();
+
+  const setDone = () => updateTodo({ ...todo, status: 'done' });
+  const setPending = () => updateTodo({ ...todo, status: 'pending' });
+
+  const button =
+    todo.status === 'pending' ? (
+      <Button onClick={setDone}>Mark done</Button>
+    ) : (
+      <Button onClick={setPending}>Mark pending</Button>
+    );
 
   return (
     <Card key={id}>
@@ -17,6 +30,7 @@ export function TodoCard({ todo }: Props) {
         {description}
         {status}
         {dueDate}
+        {button}
       </CardContent>
     </Card>
   );
