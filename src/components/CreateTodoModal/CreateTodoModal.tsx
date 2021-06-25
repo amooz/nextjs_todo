@@ -19,23 +19,30 @@ interface Props {
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
+const defaultTodo: UnsavedTodo = {
+  title: '',
+  description: '',
+  dueDate: new Date(),
+  status: 'pending',
+};
+
 export function CreateTodoModal({ createTodo, onClose: onCloseModal, open = false }: Props) {
-  const [formData, setFormData] = useState<Partial<UnsavedTodo>>({ title: '', description: '', dueDate: new Date() });
+  const [formData, setFormData] = useState<UnsavedTodo>(defaultTodo);
 
   const setTodoName = (event: ChangeEvent) => setFormData((todo) => ({ ...todo, title: event.target.value }));
   const setTodoDescription = (event: ChangeEvent) =>
     setFormData((todo) => ({ ...todo, description: event.target.value }));
   const setTodoDueDate = (event: ChangeEvent) =>
     setFormData((todo) => ({ ...todo, dueDate: new Date(event.target.value) }));
-  const resetForm = () => setFormData({ title: '', description: '', dueDate: new Date() });
+  const resetForm = () => setFormData(defaultTodo);
 
   const onClose = () => {
     onCloseModal();
     resetForm();
   };
 
-  const onSubmit = () => {
-    createTodo(formData as UnsavedTodo);
+  const onSubmit = async () => {
+    await createTodo(formData);
     onClose();
   };
 
