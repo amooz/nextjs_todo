@@ -28,11 +28,9 @@ export function EditTodoModal({ todo, editTodo, onClose: onCloseModal, open = fa
     setFormData((todo) => ({ ...todo, description: event.target.value }));
   const setTodoDueDate = (event: ChangeEvent) =>
     setFormData((todo) => ({ ...todo, dueDate: new Date(event.target.value) }));
-  // const resetForm = () => setFormData(todo);
 
   const onClose = () => {
     onCloseModal();
-    // resetForm();
   };
 
   const onSubmit = async () => {
