@@ -68,7 +68,7 @@ export function EditTodoModal({ todo, editTodo, onClose: onCloseModal, open = fa
           Cancel
         </Button>
         <Button onClick={onSubmit} color="primary">
-          Create
+          Save
         </Button>
       </DialogActions>
     </Dialog>
