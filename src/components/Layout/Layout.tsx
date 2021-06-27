@@ -14,8 +14,8 @@ export function Layout({ children }: Props) {
 
   return (
     <>
-      <Container>
-        <AppBar position="static">
+      <Container maxWidth="sm">
+        <AppBar position="sticky">
           <Toolbar>
             <Typography variant="h6">A NextJS-based todo list, by Adam Mooz</Typography>
             <Button color="inherit" onClick={toggleCreateTodoModal}>
