@@ -6,7 +6,7 @@ export class TodoGetter extends TodoService {
     const promise = new Promise<Result>((resolve, reject) => {
       this.db
         .find({}, {})
-        .sort({ dueDate: 1 })
+        .sort({ status: -1, dueDate: 1 })
         .exec((error, results) => {
           if (error) {
             reject({
