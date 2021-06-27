@@ -1,8 +1,9 @@
 import { Container, AppBar, Toolbar, Typography, Button, makeStyles } from '@material-ui/core';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useCreateTodo } from '../../hooks/useCreateTodo';
 import { useToggle } from '../../hooks/useToggle';
 import { CreateTodoModal } from '../CreateTodoModal';
+import { SearchBar } from './components/SearchBar';
 
 interface Props {
   children?: ReactNode;
@@ -12,6 +13,9 @@ const useStyles = makeStyles({
   root: {},
   newTodo: {
     margin: '0 0 0 auto',
+  },
+  searchBar: {
+    width: '100%',
   },
 });
 
@@ -31,6 +35,9 @@ export function Layout({ children }: Props) {
             </Button>
           </Toolbar>
         </AppBar>
+        <Toolbar>
+          <SearchBar className={styles.searchBar} />
+        </Toolbar>
         {children}
       </Container>
       <CreateTodoModal open={showCreateTodoModal} onClose={toggleCreateTodoModal} createTodo={createTodo} />
