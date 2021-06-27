@@ -3,7 +3,7 @@ import { Todo } from '../types/todo';
 
 interface TodosContext {
   todos: Todo[];
-  refresh: () => Promise<void>;
+  refresh: (search?: string) => Promise<void>;
 }
 
 export const defaultTodosContext: TodosContext = {
