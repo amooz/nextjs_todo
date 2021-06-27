@@ -1,11 +1,12 @@
+import { List } from '@material-ui/core';
 import React, { useContext } from 'react';
 import { TodosContext } from '../../contexts/todosContext';
-import { TodoCard } from '../TodoCard';
+import { TodoItem } from './TodoItem';
 
 export function TodosList() {
   const { todos } = useContext(TodosContext);
 
-  const todoCards = todos.map((todo) => <TodoCard key={todo._id} todo={todo} />);
+  const todoCards = todos.map((todo) => <TodoItem key={todo._id} todo={todo} />);
 
-  return <>{todoCards}</>;
+  return <List>{todoCards}</List>;
 }
