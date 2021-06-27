@@ -1,5 +1,5 @@
 import { TextField } from '@material-ui/core';
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import { TodosContext } from '../../../../contexts/todosContext';
 import { debounce } from 'debounce';
 
@@ -9,15 +9,15 @@ interface Props {
 
 export function SearchBar({ className }: Props) {
   const { refresh } = useContext(TodosContext);
-  const [search, setSearch] = useState<string | undefined>();
-  const submitSearch = debounce(async () => {
+  const submitSearch = debounce(async (search?: string) => {
     await refresh(search);
-  }, 350);
+  }, 500);
 
-  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
-  useEffect(() => {
-    submitSearch();
-  }, [search]);
+  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const searchValue = value.trim() === '' ? undefined : value;
+    submitSearch(searchValue);
+  };
 
-  return <TextField className={className} label="Search todos" value={search} onChange={onChangeSearch} />;
+  return <TextField className={className} label="Search todos" onChange={onChangeSearch} />;
 }
