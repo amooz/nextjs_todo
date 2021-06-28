@@ -2,6 +2,17 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
+  "homepage": "https://github.com/amooz/nextjs_todo",
+  "bugs": {
+    "url": "https://github.com/amooz/nextjs_todo/issues"
+  },
+  "author": {
+    "name": "Adam M. Mooz",
+    "url": "https://www.linkedin.com/in/adammooz/"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
